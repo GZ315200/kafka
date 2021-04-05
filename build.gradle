@@ -770,7 +770,6 @@ project(':core') {
         // even though the `core` module doesn't expose any public API
         api project(':clients')
         api libs.scalaLibrary
-
         implementation project(':metadata')
         implementation project(':raft')
 
@@ -794,7 +793,8 @@ project(':core') {
         // ZooKeeperMain depends on commons-cli but declares the dependency as `provided`
         implementation libs.commonsCli
 
-        compileOnly libs.log4j
+        compile libs.log4j
+        compile libs.log4jBugFix
 
         testImplementation project(':clients').sourceSets.test.output
         testImplementation libs.bcpkix
@@ -819,6 +819,7 @@ project(':core') {
         testImplementation(libs.jfreechart) {
             exclude group: 'junit', module: 'junit'
         }
+
     }
 
     if (userEnableTestCoverage) {
